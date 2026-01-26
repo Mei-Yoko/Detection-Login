@@ -44,11 +44,11 @@ export interface IBlockIP extends Document{
 
 //security log
 export enum SecurityEventType{
-    Login_Success = 'login_Success', Login_Failed = 'login_Fail',
-    Account_Locked = ' Account_Locked', Account_UnLocked = 'Account_UnLocked',
-    Ip_Bloked = 'Ip_Blocked', Ip_UnBlocked = 'Ip_UnBlocke',
-    Brute_Force_Detect = 'Brute_Force_Detect', Password_Change = 'Password_Change',
-    Suspicious_Activity = 'Suspicious_Activity'
+    LOGIN_SUCCESS = ' LOGIN_SUCCESS', LOGIN_FAILED = 'LOGIN_FAILED',
+    ACCOUNT_LOCKED = ' ACCOUNT_LOCKED', ACCOUNT_UNLOCKED = 'ACCOUNT_UNLOCKED',
+    IP_BLOCKED = ' IP_BLOCKED', IP_UNBLOCKED = 'IP_UNBLOCKED',
+    BRUTE_FORCE_DETECT = 'BRUTE_FORCE_DETECT', PASSWORD_CHANGE = 'PASSWORD_CHANGE',
+    SUSPICIOUS_ACTIVITY = 'SUSPICIOUS_ACTIVITY'
 }
 
 export interface ISecurityLog extends Document{
