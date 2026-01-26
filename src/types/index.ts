@@ -40,5 +40,9 @@ export interface IBlockIP extends Document{
 }
 
 export enum SecurityEventType{
-    
+    Login_Success = 'login_Success', Login_Failed = 'login_Fail',
+    Account_Locked = ' Account_Locked', Account_UnLocked = 'Account_UnLocked',
+    Ip_Bloked = 'Ip_Blocked', Ip_UnBlocked = 'Ip_UnBlocke',
+    Brute_Force_Detect = 'Brute_Force_Detect', Password_Change = 'Password_Change',
+    Suspicious_Activity = 'Suspicious_Activity'
 }
