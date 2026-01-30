@@ -23,6 +23,18 @@ export const connectDatabase = async (): Promise<void> => {
             console.log('Mongo Shutdown by terminal');
             process.exit(0);
         });
-
+    }catch (error){
+        console.log('Mongo error',error);
+        process.exit(1);
     }
-}
+};
+
+export const disconnectDatabase = async (): Promise<void> => {
+        try{
+            await mongoose.connection.close();
+            console.log('Mongo Disconnected Success');
+        }catch(error){
+            console.log('Error Mongo Disconnected ',error);
+            throw error;
+        }     
+    };
