@@ -10,6 +10,7 @@ export const connectDatabase = async (): Promise<void> => {
         console.log(`MongoDB Connect: ${conn.connection.host}`);
         console.log(`Database: ${conn.connection.name}`);
 
+        //event listen
         mongoose.connection.on('error', (err) => {
             console.log('Mongo Connection Error', err);
         });
@@ -29,6 +30,7 @@ export const connectDatabase = async (): Promise<void> => {
     }
 };
 
+//ใช่เมื่อปิด mongo,ตัดการเชื่อมต่อ
 export const disconnectDatabase = async (): Promise<void> => {
         try{
             await mongoose.connection.close();
