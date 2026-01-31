@@ -25,4 +25,9 @@ const UserSchema = new Schema<Iuser>({
         minlength:[12,'Password must least 12'],
         select: false
     },
+
+    role:{
+        type: String,
+        enum:
+    }
 })
