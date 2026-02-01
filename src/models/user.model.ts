@@ -28,6 +28,13 @@ const UserSchema = new Schema<Iuser>({
 
     role:{
         type: String,
-        enum:
-    }
+        enum: ['user','admin'],
+        default: 'user'
+    },
+
+    //Account Status
+    isActive: {
+        type: Boolean,
+        default: true
+    },
 })
