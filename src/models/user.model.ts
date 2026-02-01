@@ -50,4 +50,22 @@ const UserSchema = new Schema<Iuser>({
         default: null
     },
 
-})
+    //count login attempt
+    failedLoginAttempt:{
+        type: Number,
+        default: 0
+    },
+
+    //loginผิดครั้งล่าสุด
+    lastFailedLogin: {
+        type: Date
+    }
+},{
+    timestamps: true
+});
+
+//index performance
+UserSchema.index({email: 1}),
+UserSchema.index({username: 1}),
+UserSchema.index({isLocked: 1, lockUntil: 1 });
+
