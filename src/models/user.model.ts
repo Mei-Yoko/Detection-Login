@@ -37,4 +37,17 @@ const UserSchema = new Schema<Iuser>({
         type: Boolean,
         default: true
     },
+
+    //Account Locked
+    isLocked:{
+        type: Boolean,
+        default: false
+    },
+
+    //login time
+    lockUntil:{
+        type: Date,
+        default: null
+    },
+
 })
