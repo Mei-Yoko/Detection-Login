@@ -70,9 +70,12 @@ UserSchema.index({username: 1}),
 UserSchema.index({isLocked: 1, lockUntil: 1 });
 
 // Middleware Hashpass
-UserSchema.pre('save', async function (next) {
-
-    if(!this.isModified('password')){
-        return next();
+UserSchema.pre('save', async function () {
+    
+    if (!this.isModified('password')) {
+      return ;
     }
-    }
+      const saltRounds = parseInt(process.env.BCRYPT_ROUNDS || '12');
+      this.password = await bcrypt.hash(this.password, saltRounds);
+  });
+  
