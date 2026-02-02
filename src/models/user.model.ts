@@ -69,3 +69,10 @@ UserSchema.index({email: 1}),
 UserSchema.index({username: 1}),
 UserSchema.index({isLocked: 1, lockUntil: 1 });
 
+// Middleware Hashpass
+UserSchema.pre('save', async function (next) {
+
+    if(!this.isModified('password')){
+        return next();
+    }
+    }
