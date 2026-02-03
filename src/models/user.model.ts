@@ -94,7 +94,9 @@ UserSchema.methods.comparePassword = async function(userPassword:string): Promis
  */
 UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
     if(this.lockUntil && this.lockUntil < new Date()){
-        
+        return await this.updateOne({
+            
+        })
     }
 }
  
