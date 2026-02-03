@@ -93,6 +93,8 @@ UserSchema.methods.comparePassword = async function(userPassword:string): Promis
  * ถ้าเกินจำนวนที่กำหนด จะล็อค account
  */
 UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
-    
+    if(this.lockUntil && this.lockUntil < new Date()){
+        
+    }
 }
  
