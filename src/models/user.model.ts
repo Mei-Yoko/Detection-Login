@@ -79,6 +79,7 @@ UserSchema.pre('save', async function () {
       this.password = await bcrypt.hash(this.password, saltRounds);
   });
 
+//เทียบ password กับ database
 UserSchema.methods.comparePassword = async function(userPassword:string): Promise<boolean>{
     try{
         return await bcrypt.compare(userPassword, this.password)
@@ -86,4 +87,12 @@ UserSchema.methods.comparePassword = async function(userPassword:string): Promis
         throw new Error('Error Compare Password');
     }
 };
+
+/**
+ * เพิ่มจำนวนครั้งที่ login ผิด
+ * ถ้าเกินจำนวนที่กำหนด จะล็อค account
+ */
+UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
+    
+}
  
