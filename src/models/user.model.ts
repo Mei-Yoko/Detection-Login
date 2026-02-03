@@ -78,4 +78,12 @@ UserSchema.pre('save', async function () {
       const saltRounds = parseInt(process.env.BCRYPT_ROUNDS || '12');
       this.password = await bcrypt.hash(this.password, saltRounds);
   });
-  
+
+UserSchema.methods.comparePassword = async function(userPassword:string): Promise<boolean>{
+    try{
+        return await bcrypt.compare(userPassword, this.password)
+    }catch(error){
+        throw new Error('Error Compare Password');
+    }
+};
+ 
