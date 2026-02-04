@@ -105,6 +105,8 @@ UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
         $inc:{failedLoginAttempts: 1},
         $set:{lastLoginAttempts: new Date()}
     };
+    //ตรวจสอบ max attempt
+    const maxAttempt = parseInt(process.env.MAX_LOGIN_ATTEMPTS || '5')
     
 }
  
