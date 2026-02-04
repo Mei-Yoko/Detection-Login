@@ -88,16 +88,21 @@ UserSchema.methods.comparePassword = async function(userPassword:string): Promis
     }
 };
 
-/**
- * เพิ่มจำนวนครั้งที่ login ผิด
- * ถ้าเกินจำนวนที่กำหนด จะล็อค account
+/*
+  เพิ่มจำนวนครั้งที่ login ผิด
+  ถ้าเกินจำนวนที่กำหนด จะล็อค account
  */
 UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
     if(this.lockUntil && this.lockUntil < new Date()){
         return await this.updateOne({
             $set: {failedLoginAttempts: 1, lastFailedLogin: new Date()},
-            $unset:{lockUntil: 1, isLocked: 1, lastFailedLogin: 1}
+            $unset:{lockUntil: 1, isLocked: 1}
         });
     }
+    const updates: any ={
+        $inc:{failedLoginAttempts: 1},
+        $set:{lastLoginAttempts: new Date()}
+    };
+    
 }
  
