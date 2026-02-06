@@ -108,6 +108,11 @@ UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
     //ตรวจสอบ max attempt
     const maxAttempt = parseInt(process.env.MAX_LOGIN_ATTEMPTS || '5')
     const lockTime = parseInt(process.env.LOCK_TIME || '10')
+
+    //Lockin เกิน account lock
+    if(this.failedLoginAttempts + 1 >= maxAttempt && !this.isLockedlock){
+
+    }
     
 }
  
