@@ -115,7 +115,14 @@ UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
         updates.$lockUntil = new Date(Date.now() + lockTime * 60 * 1000);
     }
 
-    await this.updateOne(updates);
-    
+    await this.updateOne(updates);    
+};
+
+/*
+*reset n login to 0
+*login complete
+*/
+UserSchema.methods.resetLoginAttempts = async function (): Promise<void>{
+
 }
  
