@@ -111,8 +111,11 @@ UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
 
     //Lockin เกิน account lock
     if(this.failedLoginAttempts + 1 >= maxAttempt && !this.isLockedlock){
-
+        updates.$isLocked = true;
+        updates.$lockUntil = new Date(Date.now() + lockTime * 60 * 1000);
     }
+
+    await this.updateOne(updates);
     
 }
  
