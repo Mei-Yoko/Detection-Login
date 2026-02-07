@@ -120,9 +120,13 @@ UserSchema.methods.incrementLoginAttempts = async function (): Promise<void> {
 
 /*
 *reset n login to 0
-*login complete
+*Call when login complete
 */
 UserSchema.methods.resetLoginAttempts = async function (): Promise<void>{
-
+    await this.upadateOne({
+        //use when login complete
+        $set:{failedLoginAttempts: 0, lastSuccessfulLogin: new Date()},
+        $unset:{lastUntil: 1,isLocked: 1,lastFailedLogin: 1}
+    });
 }
- 
+
