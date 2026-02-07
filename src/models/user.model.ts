@@ -128,5 +128,10 @@ UserSchema.methods.resetLoginAttempts = async function (): Promise<void>{
         $set:{failedLoginAttempts: 0, lastSuccessfulLogin: new Date()},
         $unset:{lastUntil: 1,isLocked: 1,lastFailedLogin: 1}
     });
-}
+};
 
+//Check if Account is Currently Locked
+UserSchema.virtual('isCurrentlyLocked').get(function () {
+    //Account lock but not times up
+    return (this.isLocked && this.lockUntil && this.lockUntil > new Date());
+});
