@@ -135,3 +135,6 @@ UserSchema.virtual('isCurrentlyLocked').get(function () {
     //Account lock but not times up
     return (this.isLocked && this.lockUntil && this.lockUntil > new Date());
 });
+
+//export model
+export const User = mongoose.model<Iuser>('User', UserSchema);
