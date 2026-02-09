@@ -1,6 +1,10 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Model, Schema } from "mongoose";
 import { ILoginAttempts } from "../types";
 
+interface LoginAttemptModel extends Model<ILoginAttempts> {
+    countFailedAttempts(ipAddress: string, minutes?: number): Promise<number>;
+  }
+  
 const LoginAttemptSchema = new Schema<ILoginAttempts>({
     // Email ที่พยายาม login
     email: {
@@ -65,4 +69,15 @@ LoginAttemptSchema.index({timeStamp: 1},{expireAfterSeconds: 90 * 24 * 60 * 60})
 /**
  * count fault IP in timeframe 
  */
-
+LoginAttemptSchema.statics.countFailedAttempts = async function (ipAddress: string,minutes: number = 15): Promise<number>
+ 
+   {const since = new Date(Date.now() - minutes * 60 * 1000);
+    return this.countDocuments({
+      ipAddress,
+      success: false,
+      createdAt: { $gte: since }
+    });
+  };
+  
+  //Export Model
+  export const LoginAttempt = mongoose.model<ILoginAttempts,LoginAttemptModel>('LoginAttempt',LoginAttemptSchema);
