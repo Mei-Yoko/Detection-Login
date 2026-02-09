@@ -71,8 +71,7 @@ focused on **account protection, brute-force detection, and security auditing**.
 ```
 
 ## Login Attempt Audit Log
-Each login attempt is recorded:
----
+>Each login attempt is recorded:
 ```
 {
   "email": "user@example.com",
