@@ -71,7 +71,6 @@ focused on **account protection, brute-force detection, and security auditing**.
 ```
 
 ## Login Attempt Audit Log
----
 Each login attempt is recorded:
 ---
 ```
