@@ -1,7 +1,7 @@
-import mongoose, { Schema } from "mongoose";
-import { ILoginAttempts } from "../types";
-
-const LoginAttemptSchema = new Schema<ILoginAttempts>({
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = require("mongoose");
+const LoginAttemptSchema = new mongoose_1.Schema({
     // Email ที่พยายาม login
     email: {
         type: String,
@@ -10,12 +10,12 @@ const LoginAttemptSchema = new Schema<ILoginAttempts>({
         trim: true
     },
     // IP Address ที่พยายาม login
-    ipAddress:{
+    ipAddress: {
         type: String,
         required: true
     },
     //user agent
-    userAgent:{
+    userAgent: {
         type: String,
         default: 'Unknown'
     },
@@ -25,16 +25,15 @@ const LoginAttemptSchema = new Schema<ILoginAttempts>({
         required: true,
         default: false
     },
-
     // เหตุผลที่ login ไม่สำเร็จ
-    failureReson:{
+    failureReson: {
         type: String,
         enum: [
             'invalid_credentials',
             'account_locked',
             'account_inactive',
             'ip_blocked',
-            'rate_limited' 
+            'rate_limited'
         ]
     },
     // เวลาที่พยายาม login
@@ -47,22 +46,9 @@ const LoginAttemptSchema = new Schema<ILoginAttempts>({
     location: {
         country: String,
         city: String
-      }
     },
-    {
-      timestamps: true
-    });
-
-LoginAttemptSchema.index({email: 1, timeStamp: -1});
-LoginAttemptSchema.index({ipAddress: 1, timeStamp: -1});
-LoginAttemptSchema.index({success: 1});
-LoginAttemptSchema.index({timeStamp: -1});
-
-//delete old data after 90 days
-LoginAttemptSchema.index({timeStamp: 1},{expireAfterSeconds: 90 * 24 * 60 * 60});
-
-//static methods
-/**
- * count fault IP in timeframe 
- */
-
+}, {
+    timestamps: true
+});
+LoginAttemptSchema.index({ email: 1, timeStamp: -1 });
+LoginAttemptSchema.index({ ipAddress: 1, timeStamp: -1 });
