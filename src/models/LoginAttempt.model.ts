@@ -14,7 +14,7 @@ const LoginAttemptSchema = new Schema<ILoginAttempts>({
         type: String,
         required: true
     },
-
+    //user agent
     userAgent:{
         type: String,
         default: 'Unknown'
@@ -43,17 +43,9 @@ const LoginAttemptSchema = new Schema<ILoginAttempts>({
         default: Date.now,
         required: true
     },
-
+    // Location data
     location: {
-
+        country: String,
+        city: String
     }
-
-
-
-
-
-
-
-
-
-})
+});
