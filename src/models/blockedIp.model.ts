@@ -60,3 +60,17 @@ BlockedIPSchema.statics.isBlocked = async function(ipAddress: string): Promise<b
     });
     return !!blocked;
 };
+
+BlockedIPSchema.statics.blockIP = async function (
+    ipAddress: string,
+    durationMinutes: number,
+    attemptCount: number = 0
+  ): Promise<IBlockIP> {
+
+    const blockedUntil = new Date(Date.now() + durationMinutes * 60 * 1000);
+
+const existing = await this.findOne({ipAddress});
+    
+    if(existing){
+        
+    }
