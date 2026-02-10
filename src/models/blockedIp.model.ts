@@ -52,6 +52,11 @@ BlockedIPSchema.index({blockedUntil: 1});
 BlockedIPSchema.index({blockedUntil: 1}, {expireAfterSeconds: 0});
 
 //check Ip has been block
-BlockedIPSchema.statics.isBlocked = async function(ipAddress: string): promise <boolean>{
-    
-}
+BlockedIPSchema.statics.isBlocked = async function(ipAddress: string): Promise<boolean>{
+    const blocked = await this.findOne({
+        ipAddress,
+        isActive: true,
+        blockedUntil: { $get: new Date() }
+    });
+    return !!blocked;
+};
