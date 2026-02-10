@@ -47,3 +47,11 @@ export const BlockedIP = mongoose.model<IBlockIP>('BlockedIP',BlockedIPSchema);
 BlockedIPSchema.index({ipAddress: 1});
 BlockedIPSchema.index({isActive: 1, BlockedIP: 1});
 BlockedIPSchema.index({blockedUntil: 1});
+
+//delete Ip timeout
+BlockedIPSchema.index({blockedUntil: 1}, {expireAfterSeconds: 0});
+
+//check Ip has been block
+BlockedIPSchema.statics.isBlocked = async function(ipAddress: string): promise <boolean>{
+    
+}
