@@ -72,5 +72,10 @@ BlockedIPSchema.statics.blockIP = async function (
 const existing = await this.findOne({ipAddress});
     
     if(existing){
-        
+        existing.blockedUntil = blockedUntil;
+        existing.attempCount +=  attemptCount;
+        existing.isActive = true;
+        existing.blockedAt = new.Date();
+        return await existing.save();
     }
+}
