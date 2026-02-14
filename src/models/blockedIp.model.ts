@@ -69,7 +69,7 @@ BlockedIPSchema.statics.blockIP = async function (
 
     const blockedUntil = new Date(Date.now() + durationMinutes * 60 * 1000);
 
-const existing = await this.findOne({ipAddress});
+    const existing = await this.findOne({ipAddress});
     
     if(existing){
         existing.blockedUntil = blockedUntil;
@@ -78,4 +78,15 @@ const existing = await this.findOne({ipAddress});
         existing.blockedAt = new.Date();
         return await existing.save();
     }
+    //build new one
+    return await this.create({
+        ipAddress,
+        blockedUntil,
+        attemptCount,
+        isActive: true
+    });
+};
+
+ฺBlockedIPSchema.statics.unblockIP = async function (ipAddress: String): Promise<void> {
+    
 }
