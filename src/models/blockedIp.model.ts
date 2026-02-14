@@ -73,17 +73,19 @@ BlockedIPSchema.statics.blockIP = async function (
     
     if(existing){
         existing.blockedUntil = blockedUntil;
-        existing.attempCount +=  attemptCount;
+        existing.attempCount +=  attemptCount ?? 1;
         existing.isActive = true;
-        existing.blockedAt = new.Date();
+        existing.blockedAt = new Date();
         return await existing.save();
     }
     //build new one
     return await this.create({
         ipAddress,
         blockedUntil,
-        attemptCount,
-        isActive: true
+        attempCount: attemptCount ?? 1,
+        isActive: true,
+        blockedAt: new Date(),
+        reason:'Too many failed login attempt'
     });
 };
 
