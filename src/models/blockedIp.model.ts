@@ -89,6 +89,7 @@ BlockedIPSchema.statics.blockIP = async function (
     });
 };
 
+//unlockIP
 ฺBlockedIPSchema.statics.unblockIP = async function (ipAddress: String): Promise<void> {
-    
+    await this.updateOne({ipAddress},{$set:{isActive: false}});
 }
