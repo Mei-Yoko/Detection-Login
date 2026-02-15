@@ -90,6 +90,14 @@ BlockedIPSchema.statics.blockIP = async function (
 };
 
 //unlockIP
-ฺBlockedIPSchema.statics.unblockIP = async function (ipAddress: String): Promise<void> {
+BlockedIPSchema.statics.unblockIP = async function (ipAddress: String): Promise<void> {
     await this.updateOne({ipAddress},{$set:{isActive: false}});
+}
+
+BlockedIPSchema.statics.getBlockedList = async function () {
+  return await this.find({
+    isActive: true,
+    blockedUntil: {$gt: new Date()}
+  })
+  
 }
