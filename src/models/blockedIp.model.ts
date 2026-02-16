@@ -94,10 +94,13 @@ BlockedIPSchema.statics.unblockIP = async function (ipAddress: String): Promise<
     await this.updateOne({ipAddress},{$set:{isActive: false}});
 }
 
+//IP that has been block
 BlockedIPSchema.statics.getBlockedList = async function () {
   return await this.find({
     isActive: true,
     blockedUntil: {$gt: new Date()}
-  })
-  
-}
+  }).sort({blockedAt: -1 }); 
+};
+
+//export function
+export const blockedIP = mongoose.model<IBlockIP> ('BlockedIP',BlockedIPSchema);
