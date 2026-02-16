@@ -13,4 +13,9 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
         userId:{
             type: String
         },
+         // IP Address
+        ipAddress: {
+        type: String,
+        required: true
+      },
 })
