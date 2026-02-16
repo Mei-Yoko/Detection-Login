@@ -9,4 +9,13 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
             required: true,
             enum: Object.values(SecurityEventType)
         },
+        //user
+        userId:{
+            type: String
+        },
+         // IP Address
+        ipAddress: {
+        type: String,
+        required: true
+      },
 })
