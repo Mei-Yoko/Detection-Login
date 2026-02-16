@@ -9,9 +9,4 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
             required: true,
             enum: Object.values(SecurityEventType)
         },
-        // Email
-    email: {
-        type: String,
-        lowercase: true
-    },
 })
