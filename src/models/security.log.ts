@@ -17,5 +17,23 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
         ipAddress: {
         type: String,
         required: true
-      },
+        },
+        //userAgent
+        userAgent: {
+            type: String
+        },
+        //descrip
+        description: {
+            type: String,
+            required: true
+        },
+        //level aware
+        severaity: {
+            enum:['low','medium','high','critical'],
+            default: 'low',
+            required: true
+        },
+
 })
+
+
