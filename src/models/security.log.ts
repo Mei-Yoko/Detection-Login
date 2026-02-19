@@ -33,6 +33,10 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
             default: 'low',
             required: true
         },
+        //event
+        timeStamp:{
+            
+        }
 
 })
 
