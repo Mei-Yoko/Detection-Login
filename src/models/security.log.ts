@@ -67,5 +67,10 @@ SecurityLogSchema.statics.logEvent = async function(
     data: {
         userId?: string;
         emial?: string;
+        ipAddress: number;
+        userAgent?: string;
+        description: string
+        severity: 'low'|'medium'|'high'|'critical';
+        metadata?: any
     }
 )
