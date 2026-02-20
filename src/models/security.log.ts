@@ -48,4 +48,9 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
     }
 );
 
-
+//index
+SecurityLogSchema.index({ eventType: 1, timeStamp: -1});
+SecurityLogSchema.index({ userId: 1, timeStamp: -1});
+SecurityLogSchema.index({ ipAddress: 1, timeStamp: -1});
+SecurityLogSchema.index({ severity: 1, timeStamp: -1});
+SecurityLogSchema.index({ timeStamp: -1});
