@@ -64,7 +64,8 @@ SecurityLogSchema.index(
 
 SecurityLogSchema.statics.logEvent = async function(
     eventType: SecurityEventType,
-    data{
-
+    data: {
+        userId?: string;
+        emial?: string;
     }
 )
