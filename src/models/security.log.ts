@@ -39,7 +39,13 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
             default: Date.now,
             required: true
         },
-
-})
+        //meta data
+        metadata:{
+            type: Schema.Types.Mixed
+        }
+    },{
+        timestamps: true
+    }
+);
 
 
