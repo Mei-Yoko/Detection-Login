@@ -1,5 +1,6 @@
 import mongoose,{Schema} from "mongoose";
 import { ISecurityLog, SecurityEventType } from "../types";
+import { timeStamp } from "console";
 
 const SecurityLogSchema = new Schema <ISecurityLog>(
     {
@@ -54,3 +55,8 @@ SecurityLogSchema.index({ userId: 1, timeStamp: -1});
 SecurityLogSchema.index({ ipAddress: 1, timeStamp: -1});
 SecurityLogSchema.index({ severity: 1, timeStamp: -1});
 SecurityLogSchema.index({ timeStamp: -1});
+
+SecurityLogSchema.index(
+    {timeStamp: 1},
+    {}
+);
