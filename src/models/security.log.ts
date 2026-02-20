@@ -56,6 +56,7 @@ SecurityLogSchema.index({ ipAddress: 1, timeStamp: -1});
 SecurityLogSchema.index({ severity: 1, timeStamp: -1});
 SecurityLogSchema.index({ timeStamp: -1});
 
+//delete old logs
 SecurityLogSchema.index(
     {timeStamp: 1},
     {expireAfterSeconds: 180 * 24 * 60 * 60} // 180 days
@@ -64,6 +65,6 @@ SecurityLogSchema.index(
 SecurityLogSchema.statics.logEvent = async function(
     eventType: SecurityEventType,
     data{
-        
+
     }
 )
