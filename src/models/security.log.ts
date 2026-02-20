@@ -61,4 +61,9 @@ SecurityLogSchema.index(
     {expireAfterSeconds: 180 * 24 * 60 * 60} // 180 days
 );
 
-SecurityLogSchema.statics.logEvent = async function()
+SecurityLogSchema.statics.logEvent = async function(
+    eventType: SecurityEventType,
+    data{
+        
+    }
+)
