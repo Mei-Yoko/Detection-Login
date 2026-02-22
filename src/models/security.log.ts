@@ -83,13 +83,18 @@ SecurityLogSchema.statics.logEvent = async function (
     });
   };
   
-  
-  /**
-   * ดึง recent security events
-   */
-  SecurityLogSchema.statics.getRecentEvents = async function (limit: number = 50) {
+//pull recent security events
+SecurityLogSchema.statics.getRecentEvents = async function (limit: number = 50) {
     return await this.find()
       .sort({ timestamp: -1 })
       .limit(limit)
       .select('eventType email ipAddress severity description timestamp');
   };
+
+//pull critical events
+SecurityLogSchema.statics.getCriticalEvents = async function (
+    userId: string,
+    limit: number = 100
+) {
+    
+}
