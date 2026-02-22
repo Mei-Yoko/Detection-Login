@@ -62,15 +62,34 @@ SecurityLogSchema.index(
     {expireAfterSeconds: 180 * 24 * 60 * 60} // 180 days
 );
 
-SecurityLogSchema.statics.logEvent = async function(
+interface LogEventPayload {
+    userId?: string;
+    email?: string;
+    ipAddress: string;
+    userAgent?: string;
+    description: string;
+    severity: 'low' | 'medium' | 'high' | 'critical';
+    metadata?: any;
+  }
+
+SecurityLogSchema.statics.logEvent = async function (
     eventType: SecurityEventType,
-    data: {
-        userId?: string;
-        emial?: string;
-        ipAddress: number;
-        userAgent?: string;
-        description: string
-        severity: 'low'|'medium'|'high'|'critical';
-        metadata?: any
-    }
-)
+    data: LogEventPayload
+  ) {
+    return this.create({
+      eventType,
+      ...data,
+      timeStamp: new Date(),
+    });
+  };
+  
+  
+  /**
+   * ดึง recent security events
+   */
+  SecurityLogSchema.statics.getRecentEvents = async function (limit: number = 50) {
+    return await this.find()
+      .sort({ timestamp: -1 })
+      .limit(limit)
+      .select('eventType email ipAddress severity description timestamp');
+  };
