@@ -92,9 +92,12 @@ SecurityLogSchema.statics.getRecentEvents = async function (limit: number = 50) 
   };
 
 //pull critical events
-SecurityLogSchema.statics.getCriticalEvents = async function (
-    userId: string,
-    limit: number = 100
-) {
+SecurityLogSchema.statics.getCriticalEvents = async function (userId: string,limit: number = 100) 
+{
+    return await this.find({userId}).sort({timeStamp: -1}).limit(limit);
+}
+
+SecurityLogSchema.statics.getIPEvents = async function (ipAddress: string,limit: number = 100)
+{
     
 }
