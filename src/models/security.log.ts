@@ -103,5 +103,8 @@ SecurityLogSchema.statics.getIPEvents = async function (ipAddress: string,limit:
     return await this.find({ipAddress}).sort({timeStamp: -1}).limit(limit);
 };
 
+SecurityLogSchema.statics.getEventStats = async function ()
+{
 
+}
 
