@@ -97,7 +97,11 @@ SecurityLogSchema.statics.getCriticalEvents = async function (userId: string,lim
     return await this.find({userId}).sort({timeStamp: -1}).limit(limit);
 }
 
+//Pull event Ip address
 SecurityLogSchema.statics.getIPEvents = async function (ipAddress: string,limit: number = 100)
 {
-    
-}
+    return await this.find({ipAddress}).sort({timeStamp: -1}).limit(limit);
+};
+
+
+
