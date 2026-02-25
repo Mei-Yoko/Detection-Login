@@ -103,8 +103,18 @@ SecurityLogSchema.statics.getIPEvents = async function (ipAddress: string,limit:
     return await this.find({ipAddress}).sort({timeStamp: -1}).limit(limit);
 };
 
-SecurityLogSchema.statics.getEventStats = async function ()
-{
+SecurityLogSchema.statics.getEventStats = async function (hoursBack: number = 24){
+    const since = new Date(Date.now() - hoursBack *60*60*1000);
 
-}
+    return await this.aggregate([
+        {$match: {timesamp: {$gte: since}}},
+        {
+            $group: {
+                _id: '$eventType',
+                count: { $sum: 1 }
+        }
+    },
+    { $sort: { count: -1 } }
+    ]);
+};
 
