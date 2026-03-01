@@ -31,7 +31,7 @@ export const comparePassword = async(pliainPassword: string, hashedPassword: str
 export const validatePasswordStrength = (password: string):{
     isValid: boolean;
     errors: string[];
-    strength: 'weak' | 'medium' | 'high'; 
+    strength: 'weak' | 'medium' | 'strong'; 
 } => {
     const errors: string[] = [];
     let score = 0;
@@ -60,4 +60,17 @@ export const validatePasswordStrength = (password: string):{
     }else {
         score += 1
     }
-}
+    //set strength level
+    let strength: 'weak' | 'medium' | 'strong' = 'weak';
+    if (score >= 4) {
+    strength = 'strong';
+    } else if (score >= 3) {
+    strength = 'medium';
+    }
+
+    return{
+        isValid: errors.length === 0,
+        errors,
+        strength
+    };
+};
