@@ -48,4 +48,16 @@ export const validatePasswordStrength = (password: string):{
     }else{
         score += 1;
     }
+    //check number
+    if (!/[0-9]/.test(password)){
+        errors.push('Password must contain at least one number');
+    }else {
+        score += 1;
+    }
+    //check symbols
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)){
+        errors.push('Password must contain at least one special character');
+    }else {
+        score += 1
+    }
 }
