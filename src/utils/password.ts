@@ -22,3 +22,12 @@ export const comparePassword = async(pliainPassword: string, hashedPassword: str
     return await bcrypt.compare(pliainPassword,hashedPassword);
 };
 
+/**
+ * test how strong password
+ * @param password - check the password
+ * @returns - check how strong
+ */
+
+export const validatePasswordStrength = (password: string):{
+    
+}
