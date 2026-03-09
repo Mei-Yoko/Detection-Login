@@ -36,8 +36,7 @@ export const generateRefreshToken = (payload: JWTPayload): string => {
   if (!secret) {
     throw new Error('JWT_REFRESH_SECRET not defined');
   }
-
-  return sign(payload, secret, {expiresIn: '7d' });
+    return sign(payload, secret, {expiresIn: '7d'});
 };
 /**
  * ตรวจสอบและ decode JWT token
