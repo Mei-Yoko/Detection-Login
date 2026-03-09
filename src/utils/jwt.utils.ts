@@ -16,7 +16,7 @@ export const generateAccessToken = (payload: JWTPayload): string => {
   const secret = process.env.JWT_SECRET;
   
   if (!secret) {
-    throw new Error('JWT_SECRET is not defined in environment variables');
+    throw new Error('JWT_SECRET not defined in env variables');
   }
 
   
@@ -34,7 +34,7 @@ export const generateRefreshToken = (payload: JWTPayload): string => {
   const secret = process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET;
   
   if (!secret) {
-    throw new Error('JWT_REFRESH_SECRET is not defined');
+    throw new Error('JWT_REFRESH_SECRET not defined');
   }
 
   return sign(payload, secret, {expiresIn: '7d' });
@@ -75,7 +75,7 @@ export const verifyRefreshToken = (token: string): JWTPayload | null => {
     const secret = process.env.JWT_REFRESH_SECRET || process.env.JWT_SECRET;
     
     if (!secret) {
-      throw new Error('JWT_REFRESH_SECRET is not defined');
+      throw new Error('JWT_REFRESH_SECRET not defined');
     }
 
     const decoded = verify(token, secret);
