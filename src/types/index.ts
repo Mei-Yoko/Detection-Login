@@ -99,7 +99,7 @@ export interface SecurityDashboard{
 }
 
 //middleware
-export interface JWTpayload {
+export interface JWTPayload {
     userId: string;
     email: string;
     role: string;
