@@ -8,8 +8,8 @@ export interface JWTPayload {
 
 
 /**
- * สร้าง Access Token (JWT)
- * @param payload - ข้อมูลที่ต้องการเก็บใน token
+ * build Access Token (JWT)
+ * @param payload - collect in token
  * @returns JWT token string
  */
 export const generateAccessToken = (payload: JWTPayload): string => {
@@ -26,8 +26,8 @@ export const generateAccessToken = (payload: JWTPayload): string => {
 
 
 /**
- * สร้าง Refresh Token
- * @param payload - ข้อมูลที่ต้องการเก็บใน token
+ * build Refresh Token
+ * @param payload - collect in token
  * @returns Refresh token string
  */
 export const generateRefreshToken = (payload: JWTPayload): string => {
@@ -39,9 +39,9 @@ export const generateRefreshToken = (payload: JWTPayload): string => {
     return sign(payload, secret, {expiresIn: '7d'});
 };
 /**
- * ตรวจสอบและ decode JWT token
- * @param token - JWT token ที่ต้องการตรวจสอบ
- * @returns Decoded payload หรือ null ถ้า invalid
+ * check decode JWT token
+ * @param token - JWT token 
+ * @returns Decoded payload or null for invalid
  */
 export const verifyAccessToken = (token: string): JWTPayload | null => {
   try {
@@ -65,9 +65,9 @@ export const verifyAccessToken = (token: string): JWTPayload | null => {
 };
 
 /**
- * ตรวจสอบ Refresh Token
+ * check Refresh Token
  * @param token - Refresh token
- * @returns Decoded payload หรือ null
+ * @returns Decoded payload or null
  */
 export const verifyRefreshToken = (token: string): JWTPayload | null => {
   try {
@@ -91,7 +91,7 @@ export const verifyRefreshToken = (token: string): JWTPayload | null => {
 
 
 /**
- * สร้าง token pair (access + refresh)
+ * build token pair (access + refresh)
  * @param payload - User data
  * @returns Object containing both tokens
  */
