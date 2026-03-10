@@ -144,3 +144,5 @@ SecurityLogSchema.statics.getEventStats = async function (hoursBack: number = 24
     ]);
 };
 
+//export model
+export const SecurityLog = mongoose.model<ISecurityLog>('SecurityLog', SecurityLogSchema);
