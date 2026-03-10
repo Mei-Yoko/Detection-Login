@@ -1,4 +1,4 @@
-import mongoose,{Schema} from "mongoose";
+import mongoose,{Document, Schema} from "mongoose";
 
 //security event type
 export enum SecurityEventType{
@@ -15,7 +15,18 @@ export enum SecurityEventType{
     ACCOUNT_DELETE = 'ACCOUNT_DELETE'
 }
 
-
+//interface
+export interface ISecurityLog extends Document{
+    eventType: SecurityEventType;
+    userId?: string;
+    email?:  string;
+    ipAddress: string;
+    userAgent?: string;
+    description?: string;
+    severaity: 'low'|'medium'|'high'|'critical'
+    timeStamp: Date;
+    metadata: Schema.Types.Mixed
+}
 
 const SecurityLogSchema = new Schema <ISecurityLog>(
     {
