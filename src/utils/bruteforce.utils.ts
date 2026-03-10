@@ -47,5 +47,7 @@ export const isIPBlocked = async (ipAddress: string): Promise<boolean> => {
   * @param ipAddress - Ip check
   * @returns
   */
- export const detectBruteForce = async(ipAddress: string)
+ export const detectBruteForce = async(ipAddress: string): Promise<boolean> =>{
+    
+ }
   
