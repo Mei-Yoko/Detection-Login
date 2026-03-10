@@ -41,4 +41,11 @@ export const isIPBlocked = async (ipAddress: string): Promise<boolean> => {
      failureReson,
    });
  };
+ /**
+  * Detect Brute Force Attack
+  * Check failed login attempts in timeframe
+  * @param ipAddress - Ip check
+  * @returns
+  */
+ export const detectBruteForce = async(ipAddress: string)
   
