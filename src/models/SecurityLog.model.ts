@@ -1,6 +1,21 @@
 import mongoose,{Schema} from "mongoose";
-import { ISecurityLog, SecurityEventType } from "../types";
-import { timeStamp } from "console";
+
+//security event type
+export enum SecurityEventType{
+    LOGIN_SUCCESS = 'LOGIN_SUCCESS',
+    LOGIN_FAILED = 'LOGIN_FAILED',
+    ACCOUNT_LOCKED = 'ACCOUNT_LOCKED',
+    ACCOUNT_UNLOCKED = 'ACCOUNT_UNLOCKED',
+    IP_BLOCKED = 'IP_BLOCKED',
+    IP_UNBLOCKED = 'IP_UNBLOCKED',
+    BRUTE_FORCE_DETECTION = ' BRUTE_FORCE_DETECTION',
+    PASSWORD_CHANGED = ' PASSWORD_CHANGED',
+    SUSPICIOUS_ACTIVITY = ' SUSPICIOUS_ACTIVITY',
+    ACCOUNT_CREATE = 'ACCOUNT_CREATE',
+    ACCOUNT_DELETE = 'ACCOUNT_DELETE'
+}
+
+
 
 const SecurityLogSchema = new Schema <ISecurityLog>(
     {
