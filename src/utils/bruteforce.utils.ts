@@ -50,6 +50,9 @@ export const isIPBlocked = async (ipAddress: string): Promise<boolean> => {
  export const detectBruteForce = async(ipAddress: string): Promise<boolean> =>{
     const maxAttempts = parseInt(process.env.MAX_IP_ATTEMPTS || '10');
     const timeWindow = 15;
+    //count failed attempt in pass 15 min
     const failedAttempts = await LoginAttempt.countFailedAttempts(ipAddress,timeWindow);
+
+
  }
   
