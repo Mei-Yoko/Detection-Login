@@ -58,9 +58,14 @@ export const isIPBlocked = async (ipAddress: string): Promise<boolean> => {
     //if login than limit setup = brute force
     if(failedAttempts >= maxAttempts){
       //block ip
-      await BlockedIP(ipAddress,failedAttempts);
+      const blockedIP = new BlockedIP({
+        ipAddress,
+        failedAttempts,
+      });
+      await blockedIP.save();
+  
       //write the security log
-      await SecurityLog.logEvent(SecurityEventType.BRUTE_FORCE_DETECTION,{
+      await SecurityLog.logEvent(SecurityEventType.BRUTE_FORCE_DETECT,{
         ipAddress,
         description:`Brute force attack detected: ${failedAttempts} failed attempts in ${timeWindow} minutes`,
         severity: 'critical',
