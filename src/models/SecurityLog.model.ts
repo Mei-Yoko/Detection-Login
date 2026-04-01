@@ -23,7 +23,7 @@ export interface ISecurityLog extends Document{
     ipAddress: string;
     userAgent?: string;
     description?: string;
-    severaity: 'low'|'medium'|'high'|'critical'
+    severity: 'low'|'medium'|'high'|'critical'
     timeStamp: Date;
     metadata: Schema.Types.Mixed
 }
@@ -55,7 +55,7 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
             required: true
         },
         //level aware
-        severaity: {
+        severity: {
             enum:['low','medium','high','critical'],
             default: 'low',
             required: true
@@ -74,6 +74,15 @@ const SecurityLogSchema = new Schema <ISecurityLog>(
         timestamps: true
     }
 );
+
+interface ISecurityLogModel extends mongoose.Model<ISecurityLog> {
+    logEvent(eventType: SecurityEventType, data: LogEventPayload): Promise<ISecurityLog>;
+    getRecentEvents(limit?: number): Promise<ISecurityLog[]>;
+    getCriticalEvents(userId: string, limit?: number): Promise<ISecurityLog[]>;
+    getIPEvents(ipAddress: string, limit?: number): Promise<ISecurityLog[]>;
+    getEventStats(hoursBack?: number): Promise<any[]>;
+  }
+
 
 //index
 SecurityLogSchema.index({ eventType: 1, timeStamp: -1});
@@ -145,4 +154,7 @@ SecurityLogSchema.statics.getEventStats = async function (hoursBack: number = 24
 };
 
 //export model
-export const SecurityLog = mongoose.model<ISecurityLog>('SecurityLog', SecurityLogSchema);
+export const SecurityLog = mongoose.model<ISecurityLog, ISecurityLogModel>(
+    'SecurityLog',
+    SecurityLogSchema
+);

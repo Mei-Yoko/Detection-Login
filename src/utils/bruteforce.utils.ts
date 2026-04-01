@@ -1,5 +1,5 @@
 import{LoginAttempt} from '../models/LoginAttempt.model';
-import { BlockedIP } from '../models/BlockedIP.model';
+import { BlockedIP, blockedIP } from '../models/BlockedIP.model';
 import { SecurityLog } from '../models/SecurityLog.model';
 import { SecurityEventType } from '../types';
 
@@ -48,11 +48,34 @@ export const isIPBlocked = async (ipAddress: string): Promise<boolean> => {
   * @returns
   */
  export const detectBruteForce = async(ipAddress: string): Promise<boolean> =>{
+  try{
     const maxAttempts = parseInt(process.env.MAX_IP_ATTEMPTS || '10');
     const timeWindow = 15;
+
     //count failed attempt in pass 15 min
     const failedAttempts = await LoginAttempt.countFailedAttempts(ipAddress,timeWindow);
 
-
- }
+    //if login than limit setup = brute force
+    if(failedAttempts >= maxAttempts){
+      //block ip
+      await BlockedIP(ipAddress,failedAttempts);
+      //write the security log
+      await SecurityLog.logEvent(SecurityEventType.BRUTE_FORCE_DETECTION,{
+        ipAddress,
+        description:`Brute force attack detected: ${failedAttempts} failed attempts in ${timeWindow} minutes`,
+        severity: 'critical',
+        metadata: {
+          failedAttempts,
+          timeWindow
+        }
+      });
+      return true;
+    }
+      return false;
+   }catch(error){
+    console.error('Error brute force detection:', error);
+    return false;
+   }
+  };
+ 
   
