@@ -8,4 +8,13 @@ export const logLoginSuccess = async(
     userId: string,
     email: string,
     ipAddress: string,
-    userAgent: string): Promise<void> => {}
+    userAgent: string): Promise<void> => { await SecurityLog.logEvent(SecurityEventType.LOGIN_SUCCESS,{
+        userId,
+        email,
+        ipAddress,
+        userAgent,
+        description: `User ${email} logged in successfully`,
+        severity: 'low'
+    });
+    };
+        
