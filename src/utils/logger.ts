@@ -17,4 +17,19 @@ export const logLoginSuccess = async(
         severity: 'low'
     });
     };
-        
+    
+/**
+ * Detect login failed
+ */
+export const logLoginFailure = async(
+    email: string,
+    ipAddress: string,
+    reason: string,
+    userAgent?: string ): Promise<void> => { await SecurityLog.logEvent(SecurityEventType.LOGIN_FAILED,{
+        email,
+        ipAddress,
+        userAgent,
+        description: `Failed login attempt for ${email}: ${reason}`,
+        severity: `medium`
+    });
+};
