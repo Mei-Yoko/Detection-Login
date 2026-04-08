@@ -33,3 +33,20 @@ export const logLoginFailure = async(
         severity: `medium`
     });
 };
+/**
+ * Detect Suspiciou activity
+ */
+export const logSuspiciousActivity = async(
+    email: string,
+    ipAddress: string,
+    description: string,
+    metadata: any
+):Promise<void> =>{
+    await SecurityLog.logEvent(SecurityEventType.SUSPICIOUS_ACTIVITY,{
+        email,
+        ipAddress,
+        description,
+        severity:`high`,
+        metadata
+    });
+};
