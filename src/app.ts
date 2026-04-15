@@ -7,3 +7,6 @@ import { connectDatabase } from './config/database';
 
 const app: Application = express();
 const port = process.env.PORT || 5000;
+
+//load env
+dotenv.config();
