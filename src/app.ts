@@ -12,4 +12,9 @@ dotenv.config();
 const app: Application = express();
 const port = process.env.PORT || 5000;
 
+//==================
 //Security Middleware
+//=================
+
+//Defend http header 
+app.use(helmet());
