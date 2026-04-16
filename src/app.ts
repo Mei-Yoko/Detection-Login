@@ -18,3 +18,8 @@ const port = process.env.PORT || 5000;
 
 //Defend http header 
 app.use(helmet());
+
+//Authorize for frontend call the API
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || '*', credential: true
+}));
