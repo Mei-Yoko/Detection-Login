@@ -30,3 +30,9 @@ app.use(express.urlencoded({extended: true}));
 
 //Global Rate Limit
 import rateLimit from 'express-rate-limit';
+
+const GlobalLimit =rateLimit({
+    windowMs: 15*60*1000,
+    max: 100,
+    message: 'Too Many Request form ,Please try again',
+})
