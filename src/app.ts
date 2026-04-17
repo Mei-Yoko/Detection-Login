@@ -27,3 +27,6 @@ app.use(cors({
 //Body parser
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+
+//Global Rate Limit
+import rateLimit from 'express-rate-limit';
